@@ -1,1 +1,1 @@
-include ':app', ':parallax-recycler'
+include ':parallaxrecycler', ':demo'

@@ -3,13 +3,16 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
+
     defaultConfig {
-        applicationId "io.gitlab.mudassir.parallaxrecycler"
+        applicationId "com.example"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -20,5 +23,7 @@ android {
 }
 
 dependencies {
+    compile project(":parallaxrecycler")
     compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

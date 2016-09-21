@@ -1,0 +1,78 @@
+plugins {
+    id 'com.jfrog.bintray' version '1.7.1'
+    id 'com.github.dcendents.android-maven' version '1.5'
+}
+
+apply plugin: 'com.android.library'
+apply from: 'properties.gradle'
+
+group = 'io.gitlab.mudassir'
+version = globalVersionCode
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '24.0.2'
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName globalVersionCode
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name 'parallaxrecycler'
+            url 'https://gitlab.com/mudassir/parallax-recycler'
+
+            packaging 'aar'
+
+            licenses {
+                license {
+                    name 'BSD 3-Clause'
+                    url 'https://opensource.org/licenses/BSD-3-Clause'
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    user = 'mudassir'
+    key = bintrayApiKey
+
+    configurations = ['archives']
+
+    pkg {
+        repo = 'maven'
+        name = 'parallax-recycler'
+
+        version {
+            name = globalVersionCode
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+
+artifacts {
+    archives sourcesJar
+}
